@@ -102,6 +102,27 @@ PtfmRIner = ElastoDyn.PtfmRIner;
 PtfmPIner = ElastoDyn.PtfmPIner;
 PtfmYIner = ElastoDyn.PtfmYIner;
 
+% ==========================================================
+% 【刚柔解耦修正】从总质量和惯量中剥离出柔性附属体结构
+% 防止在后面的 Kane 积分中发生 Double Counting
+% ==========================================================
+mX = mX - Platform.Total_Appendage_Mass;
+if mX < 1e4; mX = 1e4; end % 安全阈值，防止负质量
+
+% 【修复维度报错】利用解析积分直接算出标量的转动惯量 
+% 纯结构质量的转动惯量：端部集中质量 m*L^2 + 均匀梁 m_total*L^2/3
+I_yaw_app = 3 * (Platform.M_Tip_Struct * Platform.BeamLen^2 + Platform.Target_Struct_Mass * Platform.BeamLen^2 / 3);
+I_pr_app = I_yaw_app / 2; % XY 平面对称布置时的 Pitch/Roll 近似惯量
+
+PtfmRIner = PtfmRIner - I_pr_app;
+PtfmPIner = PtfmPIner - I_pr_app;
+PtfmYIner = PtfmYIner - I_yaw_app;
+
+if PtfmRIner < 1e7; PtfmRIner = 1e7; end
+if PtfmPIner < 1e7; PtfmPIner = 1e7; end
+if PtfmYIner < 1e7; PtfmYIner = 1e7; end
+% ==========================================================
+
 GenDir  = 1;
 GBRatio = ElastoDyn.GBRatio;
 %GBoxEff = ElastoDyn.GBoxEff;
@@ -1923,7 +1944,7 @@ M_tip_struct = Platform.TipMass_H - FLUIDDENSITY * 0.63 * (pi*(24/2)^2*6 + pi*(1
 dm_X = dm_struct; % X向不考虑附加质量
 
 
-% 循环组装 3 根梁
+% 循环组装 3 根梁 (直接替换你的 for k = 1:3 整个大块)
 for k = 1:3
     BP = P_BP{k}; idx = P_idx{k}; idx_rot = P_idx_rot{k};
     
@@ -1931,53 +1952,72 @@ for k = 1:3
         r = idx(i);
         v_r = P_Ev_all{k}(i,:,:);
         v_r_tip = P_Ev_tip_all{k}(i,:);
-        % 将重力加速度与运动学加速度剥离
+        % 提取加速度残余项
         a_kin = -P_dEv{k}; 
         a_kin_tip = -P_dEv_tip{k};
         
-        % 分布积分投影
-        vr_X = dot(v_r, repmat(BP(1,:), 1,1,Platform.nt), 2); vr_Y = dot(v_r, repmat(BP(2,:), 1,1,Platform.nt), 2); vr_Z = dot(v_r, repmat(BP(3,:), 1,1,Platform.nt), 2);
-        ak_X = dot(a_kin, repmat(BP(1,:), 1,1,Platform.nt), 2); ak_Y = dot(a_kin, repmat(BP(2,:), 1,1,Platform.nt), 2); ak_Z = dot(a_kin, repmat(BP(3,:), 1,1,Platform.nt), 2);
+        vr_X = dot(v_r, repmat(BP(1,:), 1,1,Platform.nt), 2); 
+        vr_Y = dot(v_r, repmat(BP(2,:), 1,1,Platform.nt), 2); 
+        vr_Z = dot(v_r, repmat(BP(3,:), 1,1,Platform.nt), 2);
+        ak_X = dot(a_kin, repmat(BP(1,:), 1,1,Platform.nt), 2); 
+        ak_Y = dot(a_kin, repmat(BP(2,:), 1,1,Platform.nt), 2); 
+        ak_Z = dot(a_kin, repmat(BP(3,:), 1,1,Platform.nt), 2);
         
-        % 重力在局部坐标系的投影
-        g_proj_X = dot(g_vec, BP(1,:)); g_proj_Y = dot(g_vec, BP(2,:)); g_proj_Z = dot(g_vec, BP(3,:));
+        g_proj_X = dot(g_vec, BP(1,:)); 
+        g_proj_Y = dot(g_vec, BP(2,:)); 
+        g_proj_Z = dot(g_vec, BP(3,:));
         
-        % 正确的力分布：仅结构质量承受重力，总湿质量承受惯性力
-        force_X = vr_X .* (ak_X .* dm_X + g_proj_X .* dm_struct);
-        force_Y = vr_Y .* (ak_Y .* Platform.dm_H + g_proj_Y .* dm_struct);
-        force_Z = vr_Z .* (ak_Z .* Platform.dm_V + g_proj_Z .* dm_struct);
+        % --- 广义力 f_Plat 组装 ---
+        % 动力项：受 "结构质量 + 附加质量" 共同作用
+        % 重力项：仅作用于 "结构质量"
+        mass_X_tot = Platform.dm_struct + Platform.dm_add_H;
+        mass_Y_tot = Platform.dm_struct + Platform.dm_add_H;
+        mass_Z_tot = Platform.dm_struct + Platform.dm_add_V;
+        
+        force_X = vr_X .* (ak_X .* mass_X_tot + g_proj_X .* Platform.dm_struct);
+        force_Y = vr_Y .* (ak_Y .* mass_Y_tot + g_proj_Y .* Platform.dm_struct);
+        force_Z = vr_Z .* (ak_Z .* mass_Z_tot + g_proj_Z .* Platform.dm_struct);
         
         f_Plat(r) = f_Plat(r) + trapz(Platform.BeamSec, reshape(force_X + force_Y + force_Z, Platform.nt, 1));
         
-        % 端部集中质量
+        % 端部集中质量广义力
         v_r_tip_X = dot(v_r_tip, BP(1,:)); v_r_tip_Y = dot(v_r_tip, BP(2,:)); v_r_tip_Z = dot(v_r_tip, BP(3,:));
         ak_tip_X = dot(a_kin_tip, BP(1,:)); ak_tip_Y = dot(a_kin_tip, BP(2,:)); ak_tip_Z = dot(a_kin_tip, BP(3,:));
         
-        f_Plat(r) = f_Plat(r) + v_r_tip_X * (ak_tip_X * (Platform.TipMass_V - 14.70e6/3) + g_proj_X * M_tip_struct) ...
-                            + v_r_tip_Y * (ak_tip_Y * Platform.TipMass_H + g_proj_Y * M_tip_struct) ...
-                            + v_r_tip_Z * (ak_tip_Z * Platform.TipMass_V + g_proj_Z * M_tip_struct);
-                            
-        % 组装质量矩阵 IM_nom
+        tip_mass_X_tot = Platform.M_Tip_Struct + Platform.AM_Tip_H;
+        tip_mass_Y_tot = Platform.M_Tip_Struct + Platform.AM_Tip_H;
+        tip_mass_Z_tot = Platform.M_Tip_Struct + Platform.AM_Tip_V;
+        
+        f_Plat(r) = f_Plat(r) + v_r_tip_X * (ak_tip_X * tip_mass_X_tot + g_proj_X * Platform.M_Tip_Struct) ...
+                              + v_r_tip_Y * (ak_tip_Y * tip_mass_Y_tot + g_proj_Y * Platform.M_Tip_Struct) ...
+                              + v_r_tip_Z * (ak_tip_Z * tip_mass_Z_tot + g_proj_Z * Platform.M_Tip_Struct);
+                              
+        % --- 质量矩阵 C_Plat 组装 ---
         for j = 1:length(idx)
             c = idx(j);
             v_c = P_Ev_all{k}(j,:,:);
             v_c_tip = P_Ev_tip_all{k}(j,:);
             
-            vc_X = dot(v_c, repmat(BP(1,:), 1,1,Platform.nt), 2); vc_Y = dot(v_c, repmat(BP(2,:), 1,1,Platform.nt), 2); vc_Z = dot(v_c, repmat(BP(3,:), 1,1,Platform.nt), 2);
-            v_c_tip_X = dot(v_c_tip, BP(1,:)); v_c_tip_Y = dot(v_c_tip, BP(2,:)); v_c_tip_Z = dot(v_c_tip, BP(3,:));
+            vc_X = dot(v_c, repmat(BP(1,:), 1,1,Platform.nt), 2); 
+            vc_Y = dot(v_c, repmat(BP(2,:), 1,1,Platform.nt), 2); 
+            vc_Z = dot(v_c, repmat(BP(3,:), 1,1,Platform.nt), 2);
+            v_c_tip_X = dot(v_c_tip, BP(1,:)); 
+            v_c_tip_Y = dot(v_c_tip, BP(2,:)); 
+            v_c_tip_Z = dot(v_c_tip, BP(3,:));
             
-            C_Plat(r,c) = C_Plat(r,c) + trapz(Platform.BeamSec, reshape(vr_X.*vc_X.*dm_X + vr_Y.*vc_Y.*Platform.dm_H + vr_Z.*vc_Z.*Platform.dm_V, Platform.nt, 1));
+            C_Plat(r,c) = C_Plat(r,c) + trapz(Platform.BeamSec, reshape(vr_X.*vc_X.*mass_X_tot + vr_Y.*vc_Y.*mass_Y_tot + vr_Z.*vc_Z.*mass_Z_tot, Platform.nt, 1));
             
-            C_Plat(r,c) = C_Plat(r,c) + v_r_tip_X * v_c_tip_X * (Platform.TipMass_V - 14.70e6/3) ...
-                                      + v_r_tip_Y * v_c_tip_Y * Platform.TipMass_H ...
-                                      + v_r_tip_Z * v_c_tip_Z * Platform.TipMass_V;
+            C_Plat(r,c) = C_Plat(r,c) + v_r_tip_X * v_c_tip_X * tip_mass_X_tot ...
+                                      + v_r_tip_Y * v_c_tip_Y * tip_mass_Y_tot ...
+                                      + v_r_tip_Z * v_c_tip_Z * tip_mass_Z_tot;
         end
     end
     
-    % 端部的陀螺力矩与转动质量矩阵 (Euler Equation)
+    % --- 端部惯量的陀螺力矩与转动质量 (Euler Equations) ---
     for i = 1:length(idx_rot)
         r = idx_rot(i);
         w_r_tip = P_Ew_tip_all{k}(i,:);
+        % 这里使用对角化且物理真实的正定惯量
         term_rot = Platform.TipInertia * P_dEw_tip{k}' + cross(P_Ew_tip{k}', Platform.TipInertia * P_Ew_tip{k}');
         f_Plat(r) = f_Plat(r) - dot(w_r_tip, term_rot');
         

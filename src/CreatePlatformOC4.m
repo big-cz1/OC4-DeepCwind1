@@ -34,14 +34,18 @@ function Platform = CreatePlatformOC4()
     D_hydro = 1.6; 
     Area_disp = pi * (D_hydro/2)^2;
     Ca_V = 1.0; 
-    Ca_H = 1.0; 
+    Ca_H = 0.63; 
     m_add_V = FLUIDDENSITY * Ca_V * Area_disp;
     m_add_H = FLUIDDENSITY * Ca_H * Area_disp;
     
     % 生成湿质量分布数组
     dm_V = ones(Platform.nt, 1) * (m_struct + m_add_V); 
     dm_H = ones(Platform.nt, 1) * (m_struct + m_add_H); 
-    
+    % 【重要修改】明确导出纯结构质量和附加质量张量 (强制转换为 1 x 1 x nt 的 3D 张量)
+    Platform.dm_struct = reshape(ones(Platform.nt, 1) * m_struct, 1, 1, Platform.nt);
+    Platform.dm_add_V  = reshape(ones(Platform.nt, 1) * m_add_V, 1, 1, Platform.nt);
+    Platform.dm_add_H  = reshape(ones(Platform.nt, 1) * m_add_H, 1, 1, Platform.nt);
+
     % --- 模态振型定义 ---
     % 将升幂系数转换为 MATLAB polyval 所需的降幂系数
     Coeffs_V1_asc = [0, 0,  0.7004,   2.1963,  -5.6202,   6.2275,  -2.504];
@@ -124,6 +128,7 @@ function Platform = CreatePlatformOC4()
     %% 3. 梁端部集中质量 (侧柱 + 垂荡板)
     Total_OC4_Mass = 1.3473e7;
     M_Main = 1.51e5;
+    % 计算单根侧柱的纯结构质量
     M_Tip_Struct = (Total_OC4_Mass - M_Main - 3 * Target_Struct_Mass) / 3;
     
     Vol_Upper = pi * (12/2)^2 * 26;
@@ -133,9 +138,18 @@ function Platform = CreatePlatformOC4()
     AM_Tip_H = FLUIDDENSITY * Ca_global * (Vol_Base + Vol_Upper); 
     AM_Tip_V = 14.70e6 / 3; 
     
+    % 【重要修改】分别导出结构质量与附加质量，并计算附加部分总质量
+    Platform.Target_Struct_Mass = Target_Struct_Mass;
+    Platform.M_Tip_Struct = M_Tip_Struct;
+    Platform.AM_Tip_V = AM_Tip_V;
+    Platform.AM_Tip_H = AM_Tip_H;
+
+    % 汇总需要从总刚体中剥离的"附属体总结构质量"
+    Platform.Total_Appendage_Mass = 3 * (Target_Struct_Mass + M_Tip_Struct);
+
     Platform.TipMass_V = M_Tip_Struct + AM_Tip_V; 
     Platform.TipMass_H = M_Tip_Struct + AM_Tip_H; 
-    Platform.TipInertia = eye(3) * 1e9; 
+    Platform.TipInertia = diag([3e8, 3e8, 1e8]); 
 
     %% 4. 计算包含端部质量的总模态广义质量 & 广义刚度
     O1_V_tip = polyval(Mode_V1, Platform.BeamLen);

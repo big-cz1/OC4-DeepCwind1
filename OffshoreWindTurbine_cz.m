@@ -48,7 +48,7 @@ Bld = CreateBld(ElastoDyn, Geometry, Blade);
 % 根据 ElastoDyn、几何和叶片数据创建叶片结构。
 Platform = CreatePlatformOC4();
 % 创建浮式平台结构。
-Platform.Mooring     = 1;    % 1 表示使用 MoorDyn 系泊模型，2 表示使用 OpenMoor。
+Platform.Mooring     = 2;    % 1 表示使用 MoorDyn 系泊模型，2 表示使用 OpenMoor。
 Platform.WaveLoads   = 0;    % 1 表示使用 Morison 方程计算浮筒上的波浪载荷，0 表示不计算。
 
 % 定义可用的自由度（DOFs）。
@@ -80,7 +80,7 @@ DOFs.Avail      = length(DOFsStr);
 % 可用自由度总数。
 DOFs.Active     = setdiff(1:length(DOFsStr), TurnedOffDOFs);
 % 激活的自由度（排除关闭的自由度）。
-DOFs.ActNominal = setdiff(1:22, TurnedOffDOFs);
+DOFs.ActNominal = setdiff(1:22+12, TurnedOffDOFs);
 % 标称激活自由度（前22个自由度中排除关闭的）。
 DOFs.nDOFs      = length(DOFs.Active);
 % 激活自由度的数量。
@@ -104,7 +104,7 @@ Wind.t_TurbSim = (0:1:size(velocity,1)-1)*Wind.dt;
 % 计算风场的时间向量。
 
 % 如果需要使用稳态风场，取消注释以下行。
-% [Wind.t_TurbSim, velocity] = SteadyWind(Wind.y, Wind.z, 11.4, 0.2);
+% [Wind.t_TurbSim, velocity] = SteadyWind(Wind.y, Wind.z, 0, 0);
 % 生成均匀风速为 11.4 m/s，湍流强度为 0.2 的稳态风场。
 
 % 创建风速插值器，用于动态计算任意点和时间处的风速。
