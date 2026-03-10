@@ -1,4 +1,4 @@
-function [IM_nom, f_nom, Controls] = NominalSystemMatrix(q_Nom, Controls, ElastoDyn, Airfoils, Twr, Bld, Platform, WindNom, mooring_load, f_Morison)
+function [IM_nom, f_nom, Controls] = NominalSystemMatrix(q_Nom, Controls, ElastoDyn, Airfoils, Twr, Bld, Platform, WindNom, mooring_load, f_Morison, F_Fairleads)
 %#Codegen
 g = 9.80665;
 % Dofs

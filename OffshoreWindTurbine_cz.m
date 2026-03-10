@@ -138,20 +138,37 @@ if Platform.Mooring == 1
         disp('MoorDyn 加载成功');
     end
 elseif Platform.Mooring == 2
+    % ==========================================================
+    % 1. 暴力清理内存污染：确保 DLL 是以全新状态加载
+    % ==========================================================
+    if libisloaded('MoorApiwin64')
+        try calllib('MoorApiwin64', 'finish'); catch; end
+        unloadlibrary('MoorApiwin64');
+    end
+    
+    % 重新加载 DLL
     loadlibrary('MoorApiwin64', 'moorapi.h'); 
     
-    % 1. 获取绝对路径
-    % (注意：如果主程序前面使用了 cd 命令切换了文件夹，pwd 可能会变，请确保运行到这里时路径是对的)
-    xml_path = fullfile(pwd, 'CaseOC4.xml'); 
+    % ==========================================================
+    % 2. 绝对路径锚定：无视主程序中 pwd 的任何漂移
+    % ==========================================================
+    % 获取当前正在运行的这个主程序 .m 文件所在的绝对文件夹路径
+    current_script_dir = fileparts(mfilename('fullpath')); 
     
-    % 2. 强制补齐 C 语言的空字符结尾（这是它能在测试脚本里跑通的核心秘密！）
+    % 拼接出 XML 文件的绝对路径（请确保 CaseOC4.xml 确实和主程序放在同一个文件夹）
+    xml_path = fullfile(current_script_dir, 'src', 'CaseOC4.xml'); 
+    
+    % 强制补齐 C 语言的空字符结尾
     c_str_path = [xml_path, char(0)];
     
-    % 3. 调用初始化并强制中断报错
+    % ==========================================================
+    % 3. 初始化并严密监控
+    % ==========================================================
     init_status = calllib('MoorApiwin64', 'initialize', c_str_path);
     if init_status ~= 0
         error(['主程序 OpenMoor 初始化失败！状态码: ', num2str(init_status), ...
-               char(10), '试图读取的路径为: ', xml_path]);
+               char(10), '试图读取的真实物理路径为: ', xml_path, ...
+               char(10), '请确认该路径下确实存在此文件！']);
     else
         disp('====== 主程序：OpenMoor 加载并初始化成功！ ======');
     end
@@ -165,7 +182,7 @@ Controls0 = [Servo.VS_RtTq, ElastoDyn.BlPitch, reshape(phi, [1 3*Bld.nb])];
 
 % 设置仿真时间参数。
 t0  = 0;      % 仿真起始时间 (s)。
-tf  = 50;      % 仿真终止时间 (s)。
+tf  = 5;      % 仿真终止时间 (s)。
 deltat = 0.0125;  % 时间步长 (s)。
 t = t0:deltat:tf; % 时间向量。
 n = (tf-t0)/deltat; % 时间步数。

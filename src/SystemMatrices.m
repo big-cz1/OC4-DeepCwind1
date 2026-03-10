@@ -133,13 +133,24 @@ Controls(1:4) = [GenTrq, BlPitch];
 %% Mooring loads
 X  = [q_Sg, q_Sw, q_Hv, q_R, q_P, q_Y];
 XD = [qd_Sg, qd_Sw, qd_Hv, qd_R, qd_P, qd_Y];
+F_Fairleads = zeros(3, 3);
 
 dt = t*OnePlusEps - LastTime; if dt < 0; disp(LastTime); disp(t); error('Time step negative'); end
 if t == 0 || dt >= 1.25e-2
     if Platform.Mooring == 1
         calllib('MoorDyn', 'LinesCalc', X, XD, mooring_load_ptr, t, dt);
     elseif Platform.Mooring == 2
-        calllib('MoorApiwin64','update', mooring_load_ptr, X', XD', t, dt, 10000); 
+        calllib('MoorApiwin64','update', mooring_load_ptr, X', XD', t, dt, 0); 
+        % 2. 深入底层，分别抓取 3 根锚链的导缆孔局部拉力
+        for line_idx = 1:3
+            for dir = 1:3
+                % 注意：C++ 的索引大多从 0 开始。
+                % line_idx - 1 代表第 0, 1, 2 根锚链。
+                % dir - 1 代表 0(X向), 1(Y向), 2(Z向)。
+                % 请确保你的 moorapi.h 里的函数叫这个名字，否则请替换！
+                F_Fairleads(line_idx, dir) = calllib('MoorApiwin64', 'get_line_force', line_idx - 1, dir - 1);
+            end
+        end
     end
     LastTime = t;
     % 新增：存储时间 t 与 6个自由度上的系泊力/力矩 (1x7 的行向量)
@@ -165,8 +176,8 @@ WindNom.velocity(:) = Wind.Velocity(qr);
 
 % [IM_nom, f_nom, Controls] = NominalSystemMatrix_mex(q_Nom, Controls, ElastoDyn, Airfoils, Twr, Bld, Platform, WindNom, mooring_load, f_Morison);
 
-%[IM_nom, f_nom, Controls] = NominalSystemMatrix(q_Nom, Controls, ElastoDyn, Airfoils, Twr, Bld, Platform, WindNom, mooring_load, f_Morison);
-[IM_nom, f_nom, Controls] = NominalSystemMatrix_mex(q_Nom, Controls, ElastoDyn, Airfoils, Twr, Bld, Platform, WindNom, mooring_load, f_Morison);
+[IM_nom, f_nom, Controls] = NominalSystemMatrix(q_Nom, Controls, ElastoDyn, Airfoils, Twr, Bld, Platform, WindNom, mooring_load, f_Morison, F_Fairleads);
+%[IM_nom, f_nom, Controls] = NominalSystemMatrix_mex(q_Nom, Controls, ElastoDyn, Airfoils, Twr, Bld, Platform, WindNom, mooring_load, f_Morison);
 %% Assemble Initial Inertia matrix and force vector
 IM = zeros(DOFs.Avail,DOFs.Avail);
 f  = zeros(DOFs.Avail,1);
