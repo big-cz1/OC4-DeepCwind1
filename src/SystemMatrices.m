@@ -3,6 +3,7 @@ function [IM, f, Controls] = SystemMatrices(t, q, Controls, DOFs, ElastoDyn, Air
 ep = 1e-15;
 OnePlusEps = 1+ep;
 persistent LastTime
+global MooringLoadHistory
 if isempty(LastTime)
     LastTime = 0;
     fprintf('Persistent variables in System Matrices initialized.\n');
@@ -138,9 +139,12 @@ if t == 0 || dt >= 1.25e-2
     if Platform.Mooring == 1
         calllib('MoorDyn', 'LinesCalc', X, XD, mooring_load_ptr, t, dt);
     elseif Platform.Mooring == 2
-        calllib('MoorApiwin64','update', mooring_load_ptr, X', XD', t, dt, 0); 
+        calllib('MoorApiwin64','update', mooring_load_ptr, X', XD', t, dt, 10000); 
     end
     LastTime = t;
+    % 新增：存储时间 t 与 6个自由度上的系泊力/力矩 (1x7 的行向量)
+    % ========================================================
+    MooringLoadHistory = [MooringLoadHistory; t, mooring_load_ptr.value];
 end
 
 mooring_load = mooring_load_ptr.value;
@@ -150,6 +154,8 @@ EwX = qd_R*Z(1,:) + qd_Y*Z(2,:) - qd_P*Z(3,:);
 EvZ   = qd_Sg*Z(1,:) + qd_Hv*Z(2,:) - qd_Sw*Z(3,:);
 
 f_Morison = Morisons(t, Z, EwX, EvZ, wave, Platform, Platform.WaveLoads);
+% ====== 新增这行：强制将行向量转换为 6x1 的列向量，以匹配 MEX 文件的接口 ======
+f_Morison = f_Morison(:);
 
 %% Get the nominal system matrixes
 WindNom.velocity = zeros(3,31,31);
@@ -158,8 +164,9 @@ qr = {t, [1 2 3], Wind.y, Wind.z};
 WindNom.velocity(:) = Wind.Velocity(qr);
 
 % [IM_nom, f_nom, Controls] = NominalSystemMatrix_mex(q_Nom, Controls, ElastoDyn, Airfoils, Twr, Bld, Platform, WindNom, mooring_load, f_Morison);
-[IM_nom, f_nom, Controls] = NominalSystemMatrix(q_Nom, Controls, ElastoDyn, Airfoils, Twr, Bld, Platform, WindNom, mooring_load, f_Morison);
 
+%[IM_nom, f_nom, Controls] = NominalSystemMatrix(q_Nom, Controls, ElastoDyn, Airfoils, Twr, Bld, Platform, WindNom, mooring_load, f_Morison);
+[IM_nom, f_nom, Controls] = NominalSystemMatrix_mex(q_Nom, Controls, ElastoDyn, Airfoils, Twr, Bld, Platform, WindNom, mooring_load, f_Morison);
 %% Assemble Initial Inertia matrix and force vector
 IM = zeros(DOFs.Avail,DOFs.Avail);
 f  = zeros(DOFs.Avail,1);

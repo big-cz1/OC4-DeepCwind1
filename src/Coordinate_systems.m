@@ -14,9 +14,9 @@ dO2_TFA = Twr.dO2_TFA;
 dO2_TSS = Twr.dO2_TSS;
 
 % dO1_V = Platform.dO1_V;
-% dO2_V = Platform.dO1_V;
+% dO2_V = Platform.dO2_V;
 % dO1_H = Platform.dO1_H;
-% dO2_H = Platform.dO1_H;
+% dO2_H = Platform.dO2_H;
 
 dO1_B2 = dO1_B1; dO2_B2 = dO2_B1; dO3_B2 = dO3_B1; dW1_B2 = dW1_B1; dW2_B2 = dW2_B1; dW3_B2 = dW3_B1;
 dO1_B3 = dO1_B1; dO2_B3 = dO2_B1; dO3_B3 = dO3_B1; dW1_B3 = dW1_B1; dW2_B3 = dW2_B1; dW3_B3 = dW3_B1;

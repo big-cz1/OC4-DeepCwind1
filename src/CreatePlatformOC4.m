@@ -21,7 +21,7 @@ function Platform = CreatePlatformOC4()
     Platform.nBeams = 3;
     % 根据 OC4 官方定义文件，浮筒中心距为 28.867m
     Platform.BeamLen = 28.867; 
-    Platform.Angles = [0, 120, 240] * pi/180; % 在全局 XY 平面的安装角
+    Platform.Angles = [0+60, 120+60, 240+60] * pi/180; % 在全局 XY 平面的安装角
     
     Platform.nt = 15; % 离散节点数
     Platform.BeamSec = linspace(0, Platform.BeamLen, Platform.nt)';

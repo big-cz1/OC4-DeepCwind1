@@ -364,8 +364,10 @@ EvS3   =  repmat(EvQ,1,1,nb) + HvS3 + cross(repmat(EwL,1,1,nb),rQS3,2);
 
 %% ================== OC4 浮筒节点与端部线速度 ==================
 % --- 补充提取浮筒端部振型值 (用于下面端部速度和加速度的计算) ---
-O1_H_tip = Platform.O1_H(end); O2_H_tip = Platform.O2_H(end);
-O1_V_tip = Platform.O1_V(end); O2_V_tip = Platform.O2_V(end);
+O1_H_tip = Platform.O1_H(end);
+O2_H_tip = Platform.O2_H(end);
+O1_V_tip = Platform.O1_V(end);
+O2_V_tip = Platform.O2_V(end);
 % --- 梁 1 (指向 0 度) ---
 % 相对速度 X分量 (轴向缩短效应的全导数)
 XvP1_1 = -(Platform.s11_V*q_P1V1*qd_P1V1 + Platform.s22_V*q_P1V2*qd_P1V2 + Platform.s12_V*(q_P1V1*qd_P1V2 + q_P1V2*qd_P1V1) ...
@@ -537,7 +539,7 @@ C_HydroStat = [0 0       0       0            0  0;
                0 0       0   -3.776e8         0  0;
                0 0       0       0     -3.776e8  0;
                0 0       0       0            0  0];             
-ff_HydroStat = [0 0 80708100 0 0 0]' - C_HydroStat*X';
+ff_HydroStat = [0 0 1.3989e8 0 0 0]' - C_HydroStat*X';
 
 % Additional damping
 AddDamp = [100000 0       0   0   0     0;

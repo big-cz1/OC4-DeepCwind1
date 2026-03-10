@@ -13,7 +13,8 @@ addpath('./Wind_Dataset','./Wave_Dataset','./src')
 pause(.5);
 % 暂停执行 0.5 秒，以确保库加载或初始化过程顺利完成。
 
-global GRAVACC FLUIDDENSITY;      
+global GRAVACC FLUIDDENSITY;
+global MooringLoadHistory;
 GRAVACC = 9.80655; FLUIDDENSITY = 1025;
 % 定义全局常量：
 % - GRAVACC：重力加速度 (m/s^2)。
@@ -28,7 +29,7 @@ if libisloaded('MoorDyn') || libisloaded('MoorApiwin64')
         calllib('MoorDyn','LinesClose');      
         unloadlibrary MoorDyn;  
     end                                    
-    % 确保正确清理 MoorDyn 或 MoorApiwin64 动态链接库。
+    % 确保正确清理 MoorDyn 或 OpenMOOR 动态链接库。
 end
 
 % 读取风力涡轮机模型的输入数据文件。
@@ -98,13 +99,13 @@ end
 
 % 读取 TurbSim 生成的风场数据和网格。
 [velocity, Wind.y, Wind.z, Wind.nz, Wind.ny, Wind.dz,...
-          Wind.dy, Wind.dt, Wind.zHub, Wind.z1, Wind.SummVars] = readBLgrid('NTM_A');
+          Wind.dy, Wind.dt, Wind.zHub, Wind.z1, Wind.SummVars] = readBLgrid('junyunfeng11.4');
 % 读取 TurbSim 风场文件（NTM_A），获取速度场、网格点坐标、时间步长等。
 Wind.t_TurbSim = (0:1:size(velocity,1)-1)*Wind.dt;
 % 计算风场的时间向量。
 
 % 如果需要使用稳态风场，取消注释以下行。
-% [Wind.t_TurbSim, velocity] = SteadyWind(Wind.y, Wind.z, 0, 0);
+% [Wind.t_TurbSim, velocity] = SteadyWind(Wind.y, Wind.z, 0.01, 0.01);
 % 生成均匀风速为 11.4 m/s，湍流强度为 0.2 的稳态风场。
 
 % 创建风速插值器，用于动态计算任意点和时间处的风速。
@@ -138,9 +139,22 @@ if Platform.Mooring == 1
     end
 elseif Platform.Mooring == 2
     loadlibrary('MoorApiwin64', 'moorapi.h'); 
-    input_file = 'CaseOC3.xml'; 
-    calllib('MoorApiwin64', 'initialize', input_file);
-    % 加载 OpenMoor 库并使用 OC3 配置文件初始化。
+    
+    % 1. 获取绝对路径
+    % (注意：如果主程序前面使用了 cd 命令切换了文件夹，pwd 可能会变，请确保运行到这里时路径是对的)
+    xml_path = fullfile(pwd, 'CaseOC4.xml'); 
+    
+    % 2. 强制补齐 C 语言的空字符结尾（这是它能在测试脚本里跑通的核心秘密！）
+    c_str_path = [xml_path, char(0)];
+    
+    % 3. 调用初始化并强制中断报错
+    init_status = calllib('MoorApiwin64', 'initialize', c_str_path);
+    if init_status ~= 0
+        error(['主程序 OpenMoor 初始化失败！状态码: ', num2str(init_status), ...
+               char(10), '试图读取的路径为: ', xml_path]);
+    else
+        disp('====== 主程序：OpenMoor 加载并初始化成功！ ======');
+    end
 else
     error('请选择正确的系泊动力学模型');
 end
@@ -155,6 +169,10 @@ tf  = 50;      % 仿真终止时间 (s)。
 deltat = 0.0125;  % 时间步长 (s)。
 t = t0:deltat:tf; % 时间向量。
 n = (tf-t0)/deltat; % 时间步数。
+
+% 设置初始位移
+q0(1) = 10.0;
+% q0(5) = 10.0 * pi / 180;
 
 % 运行 ode4（四阶定步长 Runge-Kutta 方法）进行动态仿真。
 [q, Controls] = ode4(@(t,q,Controls) RHS(t, q, Controls, DOFs, ElastoDyn, Airfoils, Twr, Bld,...
@@ -301,3 +319,5 @@ ylabel('桨距角 (deg)');
 title('叶片桨距角');
 legend('叶片 1', '叶片 2', '叶片 3', 'Location', 'best');
 grid on;
+
+% AnimateOC4_Vibration(t, q, Platform, 50, 10);

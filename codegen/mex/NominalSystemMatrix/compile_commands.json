@@ -1,0 +1,218 @@
+[
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  NominalSystemMatrix_data.c /Fobuild\\win64\\NominalSystemMatrix_data.obj",
+    "file": "NominalSystemMatrix_data.c",
+    "output": "build/win64/NominalSystemMatrix_data.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  rt_nonfinite.c /Fobuild\\win64\\rt_nonfinite.obj",
+    "file": "rt_nonfinite.c",
+    "output": "build/win64/rt_nonfinite.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  NominalSystemMatrix_initialize.c /Fobuild\\win64\\NominalSystemMatrix_initialize.obj",
+    "file": "NominalSystemMatrix_initialize.c",
+    "output": "build/win64/NominalSystemMatrix_initialize.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  NominalSystemMatrix_terminate.c /Fobuild\\win64\\NominalSystemMatrix_terminate.obj",
+    "file": "NominalSystemMatrix_terminate.c",
+    "output": "build/win64/NominalSystemMatrix_terminate.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  Coordinate_systems.c /Fobuild\\win64\\Coordinate_systems.obj",
+    "file": "Coordinate_systems.c",
+    "output": "build/win64/Coordinate_systems.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  FASTTransMat.c /Fobuild\\win64\\FASTTransMat.obj",
+    "file": "FASTTransMat.c",
+    "output": "build/win64/FASTTransMat.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  Transform1.c /Fobuild\\win64\\Transform1.obj",
+    "file": "Transform1.c",
+    "output": "build/win64/Transform1.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  reshapeSizeChecks.c /Fobuild\\win64\\reshapeSizeChecks.obj",
+    "file": "reshapeSizeChecks.c",
+    "output": "build/win64/reshapeSizeChecks.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  Transform2.c /Fobuild\\win64\\Transform2.obj",
+    "file": "Transform2.c",
+    "output": "build/win64/Transform2.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  Transform3.c /Fobuild\\win64\\Transform3.obj",
+    "file": "Transform3.c",
+    "output": "build/win64/Transform3.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  repmat.c /Fobuild\\win64\\repmat.obj",
+    "file": "repmat.c",
+    "output": "build/win64/repmat.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  cross.c /Fobuild\\win64\\cross.obj",
+    "file": "cross.c",
+    "output": "build/win64/cross.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  dot.c /Fobuild\\win64\\dot.obj",
+    "file": "dot.c",
+    "output": "build/win64/dot.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  CheckInterpPoints.c /Fobuild\\win64\\CheckInterpPoints.obj",
+    "file": "CheckInterpPoints.c",
+    "output": "build/win64/CheckInterpPoints.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  error.c /Fobuild\\win64\\error.obj",
+    "file": "error.c",
+    "output": "build/win64/error.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  interpn.c /Fobuild\\win64\\interpn.obj",
+    "file": "interpn.c",
+    "output": "build/win64/interpn.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  assertValidSizeArg.c /Fobuild\\win64\\assertValidSizeArg.obj",
+    "file": "assertValidSizeArg.c",
+    "output": "build/win64/assertValidSizeArg.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  BEMTMex.c /Fobuild\\win64\\BEMTMex.obj",
+    "file": "BEMTMex.c",
+    "output": "build/win64/BEMTMex.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  LiftDragCoeffInterp.c /Fobuild\\win64\\LiftDragCoeffInterp.obj",
+    "file": "LiftDragCoeffInterp.c",
+    "output": "build/win64/LiftDragCoeffInterp.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  interp1.c /Fobuild\\win64\\interp1.obj",
+    "file": "interp1.c",
+    "output": "build/win64/interp1.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  fzero.c /Fobuild\\win64\\fzero.obj",
+    "file": "fzero.c",
+    "output": "build/win64/fzero.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  coprod.c /Fobuild\\win64\\coprod.obj",
+    "file": "coprod.c",
+    "output": "build/win64/coprod.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  trapz.c /Fobuild\\win64\\trapz.obj",
+    "file": "trapz.c",
+    "output": "build/win64/trapz.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  cat.c /Fobuild\\win64\\cat.obj",
+    "file": "cat.c",
+    "output": "build/win64/cat.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  interface\\_coder_NominalSystemMatrix_api.c /Fobuild\\win64\\_coder_NominalSystemMatrix_api.obj",
+    "file": "interface/_coder_NominalSystemMatrix_api.c",
+    "output": "build/win64/_coder_NominalSystemMatrix_api.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  interface\\_coder_NominalSystemMatrix_mex.c /Fobuild\\win64\\_coder_NominalSystemMatrix_mex.obj",
+    "file": "interface/_coder_NominalSystemMatrix_mex.c",
+    "output": "build/win64/_coder_NominalSystemMatrix_mex.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  eml_int_forloop_overflow_check.c /Fobuild\\win64\\eml_int_forloop_overflow_check.obj",
+    "file": "eml_int_forloop_overflow_check.c",
+    "output": "build/win64/eml_int_forloop_overflow_check.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  NominalSystemMatrix.c /Fobuild\\win64\\NominalSystemMatrix.obj",
+    "file": "NominalSystemMatrix.c",
+    "output": "build/win64/NominalSystemMatrix.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  cos.c /Fobuild\\win64\\cos.obj",
+    "file": "cos.c",
+    "output": "build/win64/cos.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  sin.c /Fobuild\\win64\\sin.obj",
+    "file": "sin.c",
+    "output": "build/win64/sin.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  triu.c /Fobuild\\win64\\triu.obj",
+    "file": "triu.c",
+    "output": "build/win64/triu.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  eml_mtimes_helper.c /Fobuild\\win64\\eml_mtimes_helper.obj",
+    "file": "eml_mtimes_helper.c",
+    "output": "build/win64/eml_mtimes_helper.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  NominalSystemMatrix_emxutil.c /Fobuild\\win64\\NominalSystemMatrix_emxutil.obj",
+    "file": "NominalSystemMatrix_emxutil.c",
+    "output": "build/win64/NominalSystemMatrix_emxutil.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  NominalSystemMatrix_mexutil.c /Fobuild\\win64\\NominalSystemMatrix_mexutil.obj",
+    "file": "NominalSystemMatrix_mexutil.c",
+    "output": "build/win64/NominalSystemMatrix_mexutil.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  interface\\_coder_NominalSystemMatrix_info.c /Fobuild\\win64\\_coder_NominalSystemMatrix_info.obj",
+    "file": "interface/_coder_NominalSystemMatrix_info.c",
+    "output": "build/win64/_coder_NominalSystemMatrix_info.obj"
+  },
+  {
+    "directory": "E:\\文档\\GitHub\\OC4-DeepCwind1\\codegen\\mex\\NominalSystemMatrix",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"E:\\文档\\GitHub\\OC4-DeepCwind1\" /I \".\\interface\" /I \"D:\\Program Files\\MATLAB\\R2025b\\extern\\include\" /I \".\" -DMODEL=NominalSystemMatrix_mex /openmp /wd4101  \"D:\\Program Files\\MATLAB\\R2025b\\extern\\version\\c_mexapi_version.c\" /Fobuild\\win64\\c_mexapi_version.obj",
+    "file": "D:/Program Files/MATLAB/R2025b/extern/version/c_mexapi_version.c",
+    "output": "build/win64/c_mexapi_version.obj"
+  }
+]

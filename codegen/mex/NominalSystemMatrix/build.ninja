@@ -1,0 +1,81 @@
+# CompilerName=msvc160
+# Mode=optim
+ninja_required_version = 1.3
+
+# Basic folders
+root = .
+builddir = $root\build\win64
+matlabdir = D:\Program Files\MATLAB\R2025b
+startdir = E:\文档\GitHub\OC4-DeepCwind1
+
+# Toolchain information
+cc = cl
+cxx = cl
+linker = link
+linkerxx = link
+
+cflags =  /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I "$root" /I "$startdir" /I "$root\interface" /I "$matlabdir\extern\include" /I "." -DMODEL=NominalSystemMatrix_mex /openmp /wd4101 
+
+cxxflags =  /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I "$root" /I "$startdir" /I "$root\interface" /I "$matlabdir\extern\include" /I "." -DMODEL=NominalSystemMatrix_mex /openmp /wd4101 
+
+ldflags =  /nologo    /DLL /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmx.lib libmex.lib libmat.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib  /out:"NominalSystemMatrix_mex.mexw64" /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmwblas.lib libemlrt.lib libcovrt.lib libut.lib libmwmathutil.lib libiomp5md.lib /nodefaultlib:vcomp /LIBPATH:"$matlabdir\bin\win64" /export:mexFunction /export:mexfilerequiredapiversion /export:emlrtMexFcnProperties /export:NominalSystemMatrix /export:NominalSystemMatrix_initialize /export:NominalSystemMatrix_terminate /export:NominalSystemMatrix_atexit /export:emlrt_marshallOut /export:emxReserve_real_T /export:emxCopyStruct_cell_wrap_0 /export:emxCopy_real_T /export:emxEnsureCapacity_real_T /export:emxFreeMatrix_cell_wrap_0 /export:emxFreeStruct_cell_wrap_0 /export:emxFree_real_T /export:emxInitMatrix_cell_wrap_0 /export:emxInitStruct_cell_wrap_0 /export:emxInit_real_T
+
+ldxxflags =  /nologo   /DLL /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmx.lib libmex.lib libmat.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib libMatlabDataArray.lib libMatlabEngine.lib  /out:"NominalSystemMatrix_mex.mexw64" /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmwblas.lib libemlrt.lib libcovrt.lib libut.lib libmwmathutil.lib libiomp5md.lib /nodefaultlib:vcomp /LIBPATH:"$matlabdir\bin\win64" /export:mexFunction /export:mexfilerequiredapiversion /export:emlrtMexFcnProperties /export:NominalSystemMatrix /export:NominalSystemMatrix_initialize /export:NominalSystemMatrix_terminate /export:NominalSystemMatrix_atexit /export:emlrt_marshallOut /export:emxReserve_real_T /export:emxCopyStruct_cell_wrap_0 /export:emxCopy_real_T /export:emxEnsureCapacity_real_T /export:emxFreeMatrix_cell_wrap_0 /export:emxFreeStruct_cell_wrap_0 /export:emxFree_real_T /export:emxInitMatrix_cell_wrap_0 /export:emxInitStruct_cell_wrap_0 /export:emxInit_real_T
+
+linkobjs = 
+
+# Build Rules
+rule cc
+    command = $cc $cflags $in /Fo$out
+
+rule cxx
+    command = $cxx $cxxflags $in /Fo$out
+
+rule link
+    command = $linker @$out.rsp $linkobjs $ldflags
+    rspfile = $out.rsp
+    rspfile_content = $in
+
+rule linkxx
+    command = $linkerxx $in $linkobjs $ldxxflags
+
+# Build
+build $builddir\NominalSystemMatrix_data.obj : cc $root\NominalSystemMatrix_data.c
+build $builddir\rt_nonfinite.obj : cc $root\rt_nonfinite.c
+build $builddir\NominalSystemMatrix_initialize.obj : cc $root\NominalSystemMatrix_initialize.c
+build $builddir\NominalSystemMatrix_terminate.obj : cc $root\NominalSystemMatrix_terminate.c
+build $builddir\Coordinate_systems.obj : cc $root\Coordinate_systems.c
+build $builddir\FASTTransMat.obj : cc $root\FASTTransMat.c
+build $builddir\Transform1.obj : cc $root\Transform1.c
+build $builddir\reshapeSizeChecks.obj : cc $root\reshapeSizeChecks.c
+build $builddir\Transform2.obj : cc $root\Transform2.c
+build $builddir\Transform3.obj : cc $root\Transform3.c
+build $builddir\repmat.obj : cc $root\repmat.c
+build $builddir\cross.obj : cc $root\cross.c
+build $builddir\dot.obj : cc $root\dot.c
+build $builddir\CheckInterpPoints.obj : cc $root\CheckInterpPoints.c
+build $builddir\error.obj : cc $root\error.c
+build $builddir\interpn.obj : cc $root\interpn.c
+build $builddir\assertValidSizeArg.obj : cc $root\assertValidSizeArg.c
+build $builddir\BEMTMex.obj : cc $root\BEMTMex.c
+build $builddir\LiftDragCoeffInterp.obj : cc $root\LiftDragCoeffInterp.c
+build $builddir\interp1.obj : cc $root\interp1.c
+build $builddir\fzero.obj : cc $root\fzero.c
+build $builddir\coprod.obj : cc $root\coprod.c
+build $builddir\trapz.obj : cc $root\trapz.c
+build $builddir\cat.obj : cc $root\cat.c
+build $builddir\_coder_NominalSystemMatrix_api.obj : cc $root\interface\_coder_NominalSystemMatrix_api.c
+build $builddir\_coder_NominalSystemMatrix_mex.obj : cc $root\interface\_coder_NominalSystemMatrix_mex.c
+build $builddir\eml_int_forloop_overflow_check.obj : cc $root\eml_int_forloop_overflow_check.c
+build $builddir\NominalSystemMatrix.obj : cc $root\NominalSystemMatrix.c
+build $builddir\cos.obj : cc $root\cos.c
+build $builddir\sin.obj : cc $root\sin.c
+build $builddir\triu.obj : cc $root\triu.c
+build $builddir\eml_mtimes_helper.obj : cc $root\eml_mtimes_helper.c
+build $builddir\NominalSystemMatrix_emxutil.obj : cc $root\NominalSystemMatrix_emxutil.c
+build $builddir\NominalSystemMatrix_mexutil.obj : cc $root\NominalSystemMatrix_mexutil.c
+build $builddir\_coder_NominalSystemMatrix_info.obj : cc $root\interface\_coder_NominalSystemMatrix_info.c
+build $builddir\c_mexapi_version.obj : cc $matlabdir\extern\version\c_mexapi_version.c
+
+# Link
+build $root\NominalSystemMatrix_mex.mexw64 : link $builddir\NominalSystemMatrix_data.obj $builddir\rt_nonfinite.obj $builddir\NominalSystemMatrix_initialize.obj $builddir\NominalSystemMatrix_terminate.obj $builddir\Coordinate_systems.obj $builddir\FASTTransMat.obj $builddir\Transform1.obj $builddir\reshapeSizeChecks.obj $builddir\Transform2.obj $builddir\Transform3.obj $builddir\repmat.obj $builddir\cross.obj $builddir\dot.obj $builddir\CheckInterpPoints.obj $builddir\error.obj $builddir\interpn.obj $builddir\assertValidSizeArg.obj $builddir\BEMTMex.obj $builddir\LiftDragCoeffInterp.obj $builddir\interp1.obj $builddir\fzero.obj $builddir\coprod.obj $builddir\trapz.obj $builddir\cat.obj $builddir\_coder_NominalSystemMatrix_api.obj $builddir\_coder_NominalSystemMatrix_mex.obj $builddir\eml_int_forloop_overflow_check.obj $builddir\NominalSystemMatrix.obj $builddir\cos.obj $builddir\sin.obj $builddir\triu.obj $builddir\eml_mtimes_helper.obj $builddir\NominalSystemMatrix_emxutil.obj $builddir\NominalSystemMatrix_mexutil.obj $builddir\_coder_NominalSystemMatrix_info.obj $builddir\c_mexapi_version.obj 
