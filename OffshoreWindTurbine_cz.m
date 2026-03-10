@@ -182,13 +182,13 @@ Controls0 = [Servo.VS_RtTq, ElastoDyn.BlPitch, reshape(phi, [1 3*Bld.nb])];
 
 % 设置仿真时间参数。
 t0  = 0;      % 仿真起始时间 (s)。
-tf  = 5;      % 仿真终止时间 (s)。
+tf  = 600;      % 仿真终止时间 (s)。
 deltat = 0.0125;  % 时间步长 (s)。
 t = t0:deltat:tf; % 时间向量。
 n = (tf-t0)/deltat; % 时间步数。
 
 % 设置初始位移
-q0(1) = 10.0;
+% q0(1) = 10.0;
 % q0(5) = 10.0 * pi / 180;
 
 % 运行 ode4（四阶定步长 Runge-Kutta 方法）进行动态仿真。
@@ -338,3 +338,37 @@ legend('叶片 1', '叶片 2', '叶片 3', 'Location', 'best');
 grid on;
 
 % AnimateOC4_Vibration(t, q, Platform, 50, 10);
+
+% =========================================================================
+% 数据保存模块：将时间和 6 自由度数据写入全新的 Excel 文件
+% =========================================================================
+
+% 1. 强制将所有变量转换为列向量 (使用 (:) 符号)
+% 这是 MATLAB 合并 table 的基本要求
+Time  = t(:);
+Surge = Surge(:);
+Sway  = Sway(:);
+Heave = Heave(:);
+Roll  = Roll(:);
+Pitch = Pitch(:);
+Yaw   = Yaw(:);
+
+% (可选) 如果你的 Roll, Pitch, Yaw 是弧度制，可以在这里转为度数以便于在 Excel 中观察
+Roll  = Roll  * (180/pi);
+Pitch = Pitch * (180/pi);
+Yaw   = Yaw   * (180/pi);
+
+% 2. 创建一个 table 表格数据结构
+% 括号里的变量名，会自动变成 Excel 第一行对应的表头文字
+MotionData = table(Time, Surge, Sway, Heave, Roll, Pitch, Yaw);
+
+% 3. 定义你想要创建的全新 Excel 文件名
+% 加上时间戳（可选），避免多次运行覆盖同一个文件
+filename = 'Platform_6DOF_Results.xlsx'; 
+
+% 4. 将表格写入 Excel
+% 'WriteMode', 'overwritesheet' 确保每次运行生成或覆盖一个干净的表格
+writetable(MotionData, filename, 'Sheet', 'Results', 'WriteMode', 'overwritesheet');
+
+% 在控制台打印成功提示
+disp(['>> 仿真数据已成功写入 Excel 文件: ', filename]);
